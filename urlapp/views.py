@@ -17,5 +17,5 @@ class CreateShortUrl(APIView):
             return Response(shorturlserializers(short_url,context={'request':request}).data,status=status.HTTP_201_CREATED)
         return Response(serializer.errors)
     
-    def redirect_short_url(request,short_url_code):
-        url = get_object_or_404(shorturl,short_url_code=short_url_code)
+def redirect_short_url(request,short_url_code):
+    url = get_object_or_404(shorturl,short_url_code=short_url_code)
