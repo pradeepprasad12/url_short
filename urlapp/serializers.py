@@ -1,15 +1,13 @@
-
-
 from rest_framework import serializers
-from .models import shorturl
+from .models import ShortURL
 
-class shorturlserializers(serializers.ModelSerializer):
-    short_url_code = serializers.SerializerMethodField()
+class ShortURLSerializer(serializers.ModelSerializer):
+    short_url = serializers.SerializerMethodField()
 
     class Meta:
-        model = shorturl
-        fields = ['original_url','short_url','short_url_code']
+        model = ShortURL
+        fields = ['original_url', 'short_code', 'short_url']
 
-    def get_short_url(self,obj):
+    def get_short_url(self, obj):
         request = self.context.get('request')
-        return request.build_absolute_url(f'/{obj.short_url}')
+        return request.build_absolute_uri(f'/{obj.short_code}/')
